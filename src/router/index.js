@@ -1,8 +1,8 @@
 import React from 'react';
 import { HashRouter, Switch, Route } from "react-router-dom";
-import { flatTree } from '../utils/index'
-import Home from '../pages/home';
-import Detail from '../pages/detail';
+import { flatTree } from '@/utils/index'
+import Home from '@/pages/home';
+import Detail from '@/pages/detail';
 
 export const routes = [
 	{

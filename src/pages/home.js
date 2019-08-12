@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getUser } from '../redux/actions'
+import { getUser } from '@/redux/actions'
 
 let Home = ({user, onClick}) => {
 	return (

@@ -1,10 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import Router from './router/index';
-import { routes } from './router/index'
+import Router, { routes } from '@/router';
 import { createHashHistory } from 'history'; 
-
-import './App.css';
 
 const { SubMenu } = Menu;
 const { Header, Sider } = Layout;
@@ -25,7 +22,6 @@ const recursion = dataSource => {
       })
   )
 }
-
 
 export default () => (
     <Layout className="layout">

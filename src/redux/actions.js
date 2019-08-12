@@ -1,4 +1,4 @@
-import { login } from '../api/index'
+import { login } from '@/api/index'
 
 // 通知 reducer 请求开始的 user
 export const REQUEST_USER = 'REQUEST_USER';
@@ -16,7 +16,7 @@ function receiveUser(user) {
 }
 
 function recevieUserOnError(message){
-  return{
+  return {
      type: RECEIVE_USER,
      isFetch: false,
      errorMsg: message
@@ -30,7 +30,7 @@ export function getUser() {
     	dispatch(requestUser())
     	//异步请求后端接口
 	    return login().then(
-	        data => dispatch(receiveUser(data)),
+	        res => dispatch(receiveUser(res.data.data)),
 	        error => dispatch(recevieUserOnError('error'))
 	    )
 	}
