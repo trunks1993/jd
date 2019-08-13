@@ -1,4 +1,5 @@
-import { login } from '@/api/index'
+import { getUserByToken, login } from '@/api/index'
+import { setToken } from '@/utils/auth'
 
 // 通知 reducer 请求开始的 user
 export const REQUEST_USER = 'REQUEST_USER';
@@ -24,18 +25,31 @@ function recevieUserOnError(message){
 }
 
 //异步请求action 上面3个基础的action整合
-export function getUser() {
+export function getUser(token) {
 	return dispatch => {
     	// 首次 dispatch：更新应用的 state 来通知API 请求发起了
     	dispatch(requestUser())
     	//异步请求后端接口
-	    return login().then(
-	        res => dispatch(receiveUser(res.data.data)),
+	    return getUserByToken(token).then(
+	        res => dispatch(receiveUser(res.data.data.user)),
 	        error => dispatch(recevieUserOnError('error'))
 	    )
 	}
 }
 
-
+export function loginByUsername(username, password) {
+  return dispatch => {
+      // 首次 dispatch：更新应用的 state 来通知API 请求发起了
+      dispatch(requestUser())
+      //异步请求后端接口
+      return login(username, password).then(
+          res => {
+            setToken(res.data.data.token)
+            return dispatch(receiveUser(res.data.data.user))
+          },
+          error => dispatch(recevieUserOnError('error'))
+      )
+  }
+}
 
 

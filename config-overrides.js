@@ -6,32 +6,64 @@ const path = require('path')
 function resolve (dir) {
     return path.join(__dirname, '.', dir)
 }
-
-
-module.exports = function override(config, env) {
-    // do stuff with the webpack config...
-
-    //启用ES7的修改器语法（babel 7）
-    // config = injectBabelPlugin(['@babel/plugin-proposal-decorators', { "legacy": true }], config)   //{ "legacy": true }一定不能掉，否则报错
-
-    //css模块化
-    // config = rewireCssModules(config, env);
-
-    //配置别名
+module.exports = {
+  // The Webpack config to use when compiling your react app for development or production.
+  webpack: function(config, env) {
+    // ...add your webpack config
     config.resolve.alias = {
         '@': resolve('src')
     };
 
-    config.resolve.mainFiles = ["index"];
-    //antd按需加载
-    // config = injectBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }], config,);
-
-	//less模块化
-	// config = rewireLess.withLoaderOptions({
-	//    javascriptEnabled: true,
-	//    modifyVars: {'@primary-color': '#1DA57A'},
-	// })(config, env)
-
+    config.resolve.mainFiles = ["index", "default"];
 
     return config;
-};
+  },
+  // The Jest config to use when running your jest tests - note that the normal rewires do not
+  // work here.
+  // jest: function(config) {
+  //   // ...add your jest config customisation...
+  //   // Example: enable/disable some tests based on environment variables in the .env file.
+  //   if (!config.testPathIgnorePatterns) {
+  //     config.testPathIgnorePatterns = [];
+  //   }
+  //   if (!process.env.RUN_COMPONENT_TESTS) {
+  //     config.testPathIgnorePatterns.push('<rootDir>/src/components/**/*.test.js');
+  //   }
+  //   if (!process.env.RUN_REDUCER_TESTS) {
+  //     config.testPathIgnorePatterns.push('<rootDir>/src/reducers/**/*.test.js');
+  //   }
+  //   return config;
+  // },
+  // The function to use to create a webpack dev server configuration when running the development
+  // server with 'npm run start' or 'yarn start'.
+  // Example: set the dev server to use a specific certificate in https.
+  devServer: function(configFunction) {
+    // Return the replacement function for create-react-app to use to generate the Webpack
+    // Development Server config. "configFunction" is the function that would normally have
+    // been used to generate the Webpack Development server config - you can use it to create
+    // a starting configuration to then modify instead of having to create a config from scratch.
+    return function(proxy, allowedHost) {
+      // Create the default config by calling configFunction with the proxy/allowedHost parameters
+      const config = configFunction(proxy, allowedHost);
+
+      // // Change the https certificate options to match your certificate, using the .env file to
+      // // set the file paths & passphrase.
+      // const fs = require('fs');
+      // config.https = {
+      //   key: fs.readFileSync(process.env.REACT_HTTPS_KEY, 'utf8'),
+      //   cert: fs.readFileSync(process.env.REACT_HTTPS_CERT, 'utf8'),
+      //   ca: fs.readFileSync(process.env.REACT_HTTPS_CA, 'utf8'),
+      //   passphrase: process.env.REACT_HTTPS_PASS
+      // };
+      config.historyApiFallback = true;
+
+      // Return your customised Webpack Development Server config.
+      return config;
+    };
+  },
+  // The paths config to use when compiling your react app for development or production.
+  paths: function(paths, env) {
+    // ...add your paths config
+    return paths;
+  }
+}

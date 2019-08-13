@@ -1,29 +1,28 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import Router, { routes } from '@/router';
+import { RouteList, asyncRoutes } from '@/router';
 import { createHashHistory } from 'history'; 
-
 const { SubMenu } = Menu;
 const { Header, Sider } = Layout;
 const history = createHashHistory();
 
-const recursion = dataSource => {
+const recursion = (dataSource, match) => {
   return (
       dataSource.map((menu, index) => {
           if (menu.children) {
               return (
                   <SubMenu key={menu.id} title={menu.title}>
-                      {recursion(menu.children)}
+                      {recursion(menu.children, match)}
                   </SubMenu>
               )
           } else {
-              return (<Menu.Item key={menu.id} onClick={e => history.push(menu.path)}>{menu.title}</Menu.Item>)
+              return (<Menu.Item key={menu.id} onClick={e => history.push(`${match.url + menu.path}`)}>{menu.title}</Menu.Item>)
           }
       })
   )
 }
 
-export default () => (
+export default ({ match }) => (
     <Layout className="layout">
 	    <Header className="header">
 	      <div className="logo" />
@@ -37,7 +36,7 @@ export default () => (
 		      <Sider width={200} style={{ background: '#fff' }}>
 		        <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: '100%', borderRight: 0 }}>
 					{
-						recursion(routes)
+						recursion(asyncRoutes, match)
 					}
 		        </Menu>
 		      </Sider>
@@ -45,11 +44,10 @@ export default () => (
 			        <Breadcrumb style={{ margin: '16px 0' }}>
 			          <Breadcrumb.Item>Home</Breadcrumb.Item>
 			          <Breadcrumb.Item>List</Breadcrumb.Item>
-			          <Breadcrumb.Item>App</Breadcrumb.Item>
+			          <Breadcrumb.Item>{match.params.topicId }</Breadcrumb.Item>
 			        </Breadcrumb>
 
-			        <Router />
-
+					<RouteList match={ match } />
 		      </Layout>
 	    </Layout>
   </Layout>

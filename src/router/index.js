@@ -1,10 +1,20 @@
 import React from 'react';
 import { HashRouter, Switch, Route } from "react-router-dom";
-import { flatTree } from '@/utils/index'
+import AuthRoute from './authRoute';
+
+import LoginPage from '@/pages/loginPage';
+import ServiceSelect from '@/pages/serviceSelect';
+import Layout from '@/pages/layout';
+import Page404 from '@/pages/page404';
+
+import { flatTree } from '@/utils'
+
+// layout下的子模块
 import Home from '@/pages/home';
 import Detail from '@/pages/detail';
 
-export const routes = [
+// 动态路由
+export const asyncRoutes = [
 	{
 		id: 0,
 		title: '人员管理',
@@ -16,7 +26,7 @@ export const routes = [
 					{
 						id: 3,
 						title: '人员1',
-						path: '/person/index1',
+						path: '/home',
 						component: Home
 					}
 				]
@@ -24,29 +34,31 @@ export const routes = [
 			{
 				id: 2,
 				title: '路由测试2',
-				path: '/person/index2',
+				path: '/detail',
 				component: Detail
 			}
 		]
 	}
 ]
 
-const RouteList = () => {
-	return (
-		<>
-			{
-				flatTree(routes).filter(item => item.component).map((item, index) => (
-					<Route exact path={item.path} key={index} component={item.component}/>
-				))
-			}
-		</>
-	)
-}
-
 export default () => (
     <HashRouter>
-        <Switch>
-            <RouteList />
-        </Switch>
+    	<Switch>
+	    	<AuthRoute exact path="/login" authTo="/jd" component={ LoginPage } />
+	    	<Route exact path='/service' component={ ServiceSelect }/>
+	    	<AuthRoute path="/jd" authTo="/login" component={ Layout } />
+	    	<Route component={Page404} />
+	    </Switch>
     </HashRouter>
+);
+
+export const RouteList = ({ match }) => (
+	<>
+		{
+			flatTree(asyncRoutes).filter(item => item.component).map((item, index) => (
+				<Route path={`${match.path + item.path}`} key={index} component={item.component}/>
+			))
+		}
+		<Route exact path={match.path} render={() => <h3>首页</h3>}/>
+	</>
 );

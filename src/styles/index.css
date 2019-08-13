@@ -12,3 +12,19 @@ body {
 .layout {
   height: 100vh;
 }
+
+.login-container {
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.login-container .login-form {
+  max-width: 300px;
+}
+.login-container .login-form-forgot {
+  float: right;
+}
+.login-container .login-form-button {
+  width: 100%;
+}
