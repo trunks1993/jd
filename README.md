@@ -25,7 +25,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-##Commit message格式##
+### `Commit message格式`
 <type>: <subject>
 
 注意冒号后面有空格。
