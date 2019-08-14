@@ -12,6 +12,6 @@ export function login(username, password) {
 }
 
 export const getUserByToken = token => request({
-	url: `/user/getUserByToken?token=${token}`,
-	method: 'get'
+  url: `/user/getUserByToken?token=${token}`,
+  method: 'get'
 })

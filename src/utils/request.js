@@ -15,7 +15,7 @@ service.interceptors.request.use(config =>
 //   }
 //   return config
 // }
-config
+  config
 , error => {
   // Do something with request error
   // console.log(error) // for debug

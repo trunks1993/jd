@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getUser } from '@/redux/actions'
 
-let Home = ({user, onClick}) => {
-	return (
-		<>
-			<button onClick={onClick}>获取用户</button>
-		 	<div>{user.name}</div>
-		</>
-	)
+let Home = ({ user, onClick }) => {
+  return (
+    <>
+      <button onClick={onClick}>获取用户</button>
+      <div>{user.name}</div>
+    </>
+  )
 }
 
 const mapStateToProps = state => {
@@ -20,7 +20,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onClick: () => {
-      	dispatch(getUser())
+      dispatch(getUser())
     }
   }
 }

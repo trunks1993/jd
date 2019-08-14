@@ -5,28 +5,28 @@ import { getUser } from '@/redux/actions'
 import { getToken } from '@/utils/auth'
 
 let authRoute = ({ component: Component, authTo, user, getUserByToken, ...rest }) => (
-	<Route {...rest} render={props => {
-				const isLogin = props.match.path === '/login';
-				const token = getToken();
-				const c = <Component {...props} />;
-				const r = <Redirect to={ {pathname: authTo, state: { from: props.location }} }/>;
-				if(token) {
-					// 如果有token 判断有没有用户信息没有就去拉取
-					if (!user.id) {
-						getUserByToken(token).then(
-							() => !isLogin ? c : r,
-							error => !isLogin ? r : c
-						)
-					} else {
-						return !isLogin ? c : r
-					}
-					
-				} else {
-					return !isLogin ? r : c
-				}
-		    }
-  		}
-  	/>
+  <Route {...rest} render={props => {
+    const isLogin = props.match.path === '/login';
+    const token = getToken();
+    const c = <Component {...props} />;
+    const r = <Redirect to={{ pathname: authTo, state: { from: props.location } }} />;
+    if (token) {
+      // 如果有token 判断有没有用户信息没有就去拉取
+      if (!user.id) {
+        getUserByToken(token).then(
+          () => !isLogin ? c : r,
+          error => !isLogin ? r : c
+        )
+      } else {
+        return !isLogin ? c : r
+      }
+
+    } else {
+      return !isLogin ? r : c
+    }
+  }
+  }
+  />
 )
 
 const mapStateToProps = state => {

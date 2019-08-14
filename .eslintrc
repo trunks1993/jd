@@ -1,0 +1,12 @@
+{
+  "extends": "react-app",
+  "rules":
+  {
+  	"indent": ["error", 2], // 两个缩进
+    "no-multi-spaces": 2, // 禁止出现多个空格
+    "react/jsx-tag-spacing": 2, // 总是在自动关闭的标签前加一个空格，正常情况下也不需要换行
+    "react/jsx-pascal-case": 2, // React模块名使用帕斯卡命名，实例使用骆驼式命名
+    "react/self-closing-comp": 2, // 对于没有子元素的标签来说总是自己关闭标签
+    "react/jsx-boolean-value": 1, // 如果属性值为 true, 可以直接省略
+  }
+}
