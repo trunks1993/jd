@@ -8,7 +8,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 
-import '@/styles/index.css'
+import '@/styles/index.scss'
 
 import '@/mock/index'
 

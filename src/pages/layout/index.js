@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import { RouteList, asyncRoutes } from '@/router';
 import { createHashHistory } from 'history'; 
 const { SubMenu } = Menu;
@@ -41,12 +41,6 @@ export default ({ match }) => (
 		        </Menu>
 		      </Sider>
 		      <Layout style={{ padding: '0 24px 24px' }}>
-			        <Breadcrumb style={{ margin: '16px 0' }}>
-			          <Breadcrumb.Item>Home</Breadcrumb.Item>
-			          <Breadcrumb.Item>List</Breadcrumb.Item>
-			          <Breadcrumb.Item>{match.params.topicId }</Breadcrumb.Item>
-			        </Breadcrumb>
-
 					<RouteList match={ match } />
 		      </Layout>
 	    </Layout>
