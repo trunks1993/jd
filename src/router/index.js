@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import AuthRoute from './authRoute';
 
 import LoginPage from '@/pages/loginPage';
@@ -26,7 +26,7 @@ export const asyncRoutes = [
 					{
 						id: 3,
 						title: '人员1',
-						path: '/home',
+						path: '/person/jdperson',
 						component: Home
 					}
 				]
@@ -44,21 +44,23 @@ export const asyncRoutes = [
 export default () => (
     <HashRouter>
     	<Switch>
-	    	<AuthRoute exact path="/login" authTo="/jd" component={ LoginPage } />
+	    	<AuthRoute exact path="/login" authTo="/" component={ LoginPage } />
 	    	<Route exact path='/service' component={ ServiceSelect }/>
 	    	<AuthRoute path="/jd" authTo="/login" component={ Layout } />
+	    	<Redirect from="/" to="/jd" />
 	    	<Route component={Page404} />
 	    </Switch>
     </HashRouter>
 );
 
 export const RouteList = ({ match }) => (
-	<>
+	<Switch>
 		{
 			flatTree(asyncRoutes).filter(item => item.component).map((item, index) => (
 				<Route path={`${match.path + item.path}`} key={index} component={item.component}/>
 			))
 		}
 		<Route exact path={match.path} render={() => <h3>首页</h3>}/>
-	</>
+		<Route component={Page404} />
+	</Switch>
 );

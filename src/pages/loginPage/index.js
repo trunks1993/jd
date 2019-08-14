@@ -42,7 +42,7 @@ const mapDispatchToProps = dispatch => {
   return {
     handleLogin: () => {
       	dispatch(loginByUsername()).then(res => {
-      		history.push('/jd')
+      		history.push('/')
       	})
     }
   }
