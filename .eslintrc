@@ -20,7 +20,7 @@
     "no-else-return": 2, // 禁止 if 语句中 return 语句之后有 else 块
     "no-global-assign": 2, // 禁止对原生对象或只读的全局对象进行赋值
     "no-implicit-globals": "error", // 禁止在全局范围使用变量和函数声明
-    "no-magic-numbers": "error", // 禁用魔术数字
+    "no-magic-numbers": "warn", // 禁用魔术数字
     "no-mixed-spaces-and-tabs": "error", // 禁止使用 空格 和 tab 混合缩进
     "block-spacing": "error", // 禁止或强制在代码块中开括号前和闭括号后有空格
     "camelcase": ["error", {"ignoreDestructuring": true, "allow": ["UNSAFE_componentWillMount"]}], // 要求使用骆驼拼写法

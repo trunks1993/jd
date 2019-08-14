@@ -21,10 +21,13 @@
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .js --ext .jsx src/",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "config": {
+    "commitizen": {
+      "path": "cz-customizable"
+    }
   },
   "browserslist": {
     "production": [
