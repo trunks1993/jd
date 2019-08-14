@@ -4,7 +4,7 @@ export function flatTree(tree, flatArr = []) {
 }
 
 function func(tree, arr) {
-  if (tree.length === 0) return
+  if (!tree.length) return;
   Array.prototype.push.apply(arr, tree);
-  tree.map(item => (item.children && item.children.length > 0) && func(item.children, arr));
+  tree.map(item => (item.children && item.children.length) && func(item.children, arr));
 }

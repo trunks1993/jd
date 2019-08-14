@@ -1,10 +1,11 @@
 import React from 'react';
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getUser } from '@/redux/actions'
-import { getToken } from '@/utils/auth'
+import { getUser } from '@/redux/actions';
+import { getToken } from '@/utils/auth';
 
-let authRoute = ({ component: Component, authTo, user, getUserByToken, ...rest }) => (
+const authRoute = ({ component: Component, authTo, user, getUserByToken, ...rest }) => (
+  // eslint-disable-next-line complexity
   <Route {...rest} render={props => {
     const isLogin = props.match.path === '/login';
     const token = getToken();
@@ -16,29 +17,29 @@ let authRoute = ({ component: Component, authTo, user, getUserByToken, ...rest }
         getUserByToken(token).then(
           () => !isLogin ? c : r,
           error => !isLogin ? r : c
-        )
+        );
       } else {
-        return !isLogin ? c : r
+        return !isLogin ? c : r;
       }
 
     } else {
-      return !isLogin ? r : c
+      return !isLogin ? r : c;
     }
   }
   }
   />
-)
+);
 
 const mapStateToProps = state => {
   return {
     user: state.user
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     getUserByToken: token => dispatch(getUser(token))
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(authRoute)
+export default connect(mapStateToProps, mapDispatchToProps)(authRoute);

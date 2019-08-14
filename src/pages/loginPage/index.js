@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 import { connect } from 'react-redux';
-import { loginByUsername } from '@/redux/actions'
+import { loginByUsername } from '@/redux/actions';
 import { createHashHistory } from 'history';
 const history = createHashHistory();
 
@@ -26,26 +26,26 @@ const LoginPage = ({ handleLogin }) => (
 
         <Button type="primary" onClick={handleLogin} className="login-form-button">
 					Log in
-	          </Button>
+        </Button>
       </Form.Item>
     </Form>
   </div>
-)
+);
 
 const mapStateToProps = state => {
   return {
     user: state.user
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     handleLogin: () => {
       dispatch(loginByUsername()).then(res => {
-        history.push('/')
-      })
+        history.push('/');
+      });
     }
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

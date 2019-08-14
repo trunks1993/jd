@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
   Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
 import AuthRoute from './authRoute';
 
 import LoginPage from '@/pages/loginPage';
@@ -14,7 +14,7 @@ import Page404 from '@/pages/page404';
 
 import {
   flatTree
-} from '@/utils'
+} from '@/utils';
 
 // layout下的子模块
 import Home from '@/pages/home';
@@ -39,13 +39,13 @@ export const asyncRoutes = [{
     path: '/detail',
     component: Detail
   }]
-}]
+}];
 
 export default () => (
   <HashRouter>
     <Switch>
       <AuthRoute exact path="/login" authTo="/" component={LoginPage} />
-      <Route exact path='/service' component={ServiceSelect} />
+      <Route exact path="/service" component={ServiceSelect} />
       <AuthRoute path="/jd" authTo="/login" component={Layout} />
       <Redirect from="/" to="/jd" />
       <Route component={Page404} />

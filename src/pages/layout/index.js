@@ -12,15 +12,14 @@ const recursion = (dataSource, match) => {
       if (menu.children) {
         return (
           <SubMenu key={menu.id} title={menu.title}>
-          	 {recursion(menu.children, match)}
+            {recursion(menu.children, match)}
           </SubMenu>
-        )
-      } else {
-        return (<Menu.Item key={menu.id} onClick={e => history.push(`${match.url + menu.path}`)}>{menu.title}</Menu.Item>)
+        );
       }
+      return (<Menu.Item key={menu.id} onClick={e => history.push(`${match.url + menu.path}`)}>{menu.title}</Menu.Item>);
     })
-  )
-}
+  );
+};
 
 export default ({ match }) => (
   <Layout className="layout">
@@ -33,16 +32,16 @@ export default ({ match }) => (
       </Menu>
     </Header>
     <Layout>
-	      <Sider width={200} style={{ background: '#fff' }}>
-	        <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: '100%', borderRight: 0 }}>
-    				{
-    					recursion(asyncRoutes, match)
-    				}
-	        </Menu>
-	      </Sider>
-	      <Layout style={{ padding: '0 24px 24px' }}>
-				  <RouteList match={ match } />
-	      </Layout>
+      <Sider width={200} style={{ background: '#fff' }}>
+        <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: '100%', borderRight: 0 }}>
+          {
+            recursion(asyncRoutes, match)
+          }
+        </Menu>
+      </Sider>
+      <Layout style={{ padding: '0 24px 24px' }}>
+        <RouteList match={ match } />
+      </Layout>
     </Layout>
   </Layout>
 );
