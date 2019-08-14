@@ -8,7 +8,7 @@ const history = createHashHistory();
 
 const recursion = (dataSource, match) => {
   return (
-    dataSource.map((menu, index) => {
+    dataSource.map(menu => {
       if (menu.children) {
         return (
           <SubMenu key={menu.id} title={menu.title}>
