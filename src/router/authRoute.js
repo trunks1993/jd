@@ -18,13 +18,10 @@ const authRoute = ({ component: Component, authTo, user, getUserByToken, ...rest
           () => !isLogin ? c : r,
           error => !isLogin ? r : c
         );
-      } else {
-        return !isLogin ? c : r;
       }
-
-    } else {
-      return !isLogin ? r : c;
+      return !isLogin ? c : r;
     }
+    return !isLogin ? r : c;
   }
   }
   />
