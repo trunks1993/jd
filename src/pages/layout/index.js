@@ -1,47 +1,40 @@
 import React from 'react';
-import { Layout, Menu } from 'antd';
-import { RouteList, asyncRoutes } from '@/router';
-import { createHashHistory } from 'history';
-const { SubMenu } = Menu;
+import { connect } from 'react-redux';
+import SiderMenu from './SiderMenu';
+import { Layout } from 'antd';
+import { RouteList } from '@/router';
+import { UserContext } from '@/utils/contexts';
 const { Header, Sider } = Layout;
-const history = createHashHistory();
 
-const recursion = (dataSource, match) => {
+const StoreLayout = ({ match, user }) => {
   return (
-    dataSource.map(menu => {
-      if (menu.children) {
-        return (
-          <SubMenu key={menu.id} title={menu.title}>
-            {recursion(menu.children, match)}
-          </SubMenu>
-        );
-      }
-      return (<Menu.Item key={menu.id} onClick={e => history.push(`${match.url + menu.path}`)}>{menu.title}</Menu.Item>);
-    })
+    <UserContext.Provider value={user}>
+      <Layout className="layout">
+        <Sider width={270}>
+          <div className="logo" />
+          <SiderMenu match={match} />
+        </Sider>
+        <Layout>
+          <Header className="header" style={{ background: '#fff', padding: 0, height: '110px' }} />
+          <Layout style={{ padding: '0 24px 24px' }}>
+            <RouteList match={ match } />
+          </Layout>
+        </Layout>
+      </Layout>
+    </UserContext.Provider>
   );
 };
 
-export default ({ match }) => (
-  <Layout className="layout">
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']} style={{ lineHeight: '64px' }}>
-        <Menu.Item key="1">nav 1</Menu.Item>
-        <Menu.Item key="2">nav 2</Menu.Item>
-        <Menu.Item key="3">nav 3</Menu.Item>
-      </Menu>
-    </Header>
-    <Layout>
-      <Sider width={200} style={{ background: '#fff' }}>
-        <Menu mode="inline" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: '100%', borderRight: 0 }}>
-          {
-            recursion(asyncRoutes, match)
-          }
-        </Menu>
-      </Sider>
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <RouteList match={ match } />
-      </Layout>
-    </Layout>
-  </Layout>
-);
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatch
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoreLayout);
