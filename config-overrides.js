@@ -1,9 +1,9 @@
 const { override, fixBabelImports, addWebpackAlias, addWebpackResolve, useEslintRc } = require('customize-cra');
 
-const path = require('path')
+const path = require('path');
 
 function resolve(dir) {
-  return path.join(__dirname, '.', dir)
+  return path.join(__dirname, '.', dir);
 }
 
 module.exports = override(
@@ -16,7 +16,7 @@ module.exports = override(
     '@': resolve('src'),
   }),
   addWebpackResolve({
-    mainFiles: ["index", "default"]
+    mainFiles: ['index', 'default']
   }),
   useEslintRc()
 );
