@@ -5,7 +5,6 @@ import { getUser } from '@/redux/actions';
 const Home = ({ user, onClick }) => {
   return (
     <>
-      <button onClick={onClick}>获取用户</button>
       <div>{user.name}</div>
     </>
   );
