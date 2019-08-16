@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createHashHistory } from 'history';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 import { UserContext } from '@/utils/contexts';
 const { SubMenu } = Menu;
 const history = createHashHistory();
@@ -10,7 +10,12 @@ const recursion = (dataSource, match) => {
     dataSource.map(menu => {
       if (menu.children) {
         return (
-          <SubMenu key={menu.id} title={menu.title}>
+          <SubMenu key={menu.id} title={
+            <span>
+              <Icon type="mail" />
+              <span>{menu.title}</span>
+            </span>
+          }>
             {recursion(menu.children, match)}
           </SubMenu>
         );
@@ -23,7 +28,7 @@ const recursion = (dataSource, match) => {
 export default ({ match }) => {
   const user = useContext(UserContext);
   return (
-    <Menu mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']} style={{ height: 'calc(100% - 110px)', borderRight: 0, background: '#131C2E' }}>
+    <Menu className="sider-menu" mode="inline" theme="dark" defaultSelectedKeys={['1']} defaultOpenKeys={['sub1']}>
       {
         recursion(user.menu, match)
       }

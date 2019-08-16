@@ -1,5 +1,5 @@
 import { getUserByToken, login } from '@/api/index';
-import { setToken } from '@/utils/auth';
+import { setToken, removeToken } from '@/utils/auth';
 
 // 通知 reducer 请求开始的 user
 export const REQUEST_USER = 'REQUEST_USER';
@@ -52,3 +52,9 @@ export function loginByUsername(username, password) {
     );
   };
 }
+
+export const loginOut = () => dispatch => {
+  removeToken();
+  return dispatch(receiveUser({}));
+};
+

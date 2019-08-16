@@ -1,0 +1,86 @@
+$fullHeight: 100vh;
+$headerHight: 110px;
+$antdMenuSelectedColor: #0ACBEE;
+$customizeBlack: #131c2e;
+
+// 常用继承样式
+.common-flex {
+  display: flex;
+	align-items: center;
+  justify-content: center;
+}
+
+// layout主体
+.layout {
+  height: $fullHeight;
+}
+
+// 登录页样式
+.login-container {
+	height: $fullHeight;
+	@extend .common-flex;
+  .login-form {
+    max-width: 300px;
+  }
+  .login-form-forgot {
+    float: right;
+  }
+  .login-form-button {
+    width: 100%;
+  }
+}
+
+// 侧边栏
+.sider-container {
+  box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.1);
+  &-logo {
+    height: $headerHight;
+    background: $customizeBlack;
+    @extend .common-flex;
+    img {
+      height: 35px;
+    }
+  }
+  .sider-menu {
+    height: calc(100% - #{$headerHight});
+    border-right: 0; 
+    background: $customizeBlack;
+    padding-top: 40px;
+    .ant-menu-sub, .ant-menu-submenu {
+      color: #DEDEDE;
+    }
+    .ant-menu-submenu-open {
+      color: $antdMenuSelectedColor;
+    }
+    .ant-menu-submenu-arrow {
+      display: none;
+    }
+    .ant-menu-item-selected {
+      color: $antdMenuSelectedColor;
+      background: #000c17!important;
+    }
+  }
+}
+
+// 头部
+.header-container {
+  background: #fff;
+  padding: 0;
+  height: $headerHight;
+  position: relative;
+  .ant-dropdown-link {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translate(0, -50%);
+    font-size: 24px;
+    color:rgba(72, 88, 119, 1);
+    font-family:ArialMT;
+  }
+}
+
+// 主体部分
+.main-container {
+  padding: 40px;
+  background: rgb(230, 231, 233);
+}

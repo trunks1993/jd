@@ -1,22 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SiderMenu from './SiderMenu';
+import Header from './Header';
 import { Layout } from 'antd';
 import { RouteList } from '@/router';
 import { UserContext } from '@/utils/contexts';
-const { Header, Sider } = Layout;
+const { Sider } = Layout;
 
 const StoreLayout = ({ match, user }) => {
   return (
     <UserContext.Provider value={user}>
       <Layout className="layout">
-        <Sider width={270}>
-          <div className="logo" />
+        <Sider className="sider-container" width={270}>
+          <div className="sider-container-logo">
+            <img alt="" src={require('@/assets/images/siderLogo.png')} />
+          </div>
           <SiderMenu match={match} />
         </Sider>
         <Layout>
-          <Header className="header" style={{ background: '#fff', padding: 0, height: '110px' }} />
-          <Layout style={{ padding: '0 24px 24px' }}>
+          <Header />
+          <Layout className="main-container">
             <RouteList match={ match } />
           </Layout>
         </Layout>
@@ -31,10 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    dispatch
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(StoreLayout);
+export default connect(mapStateToProps, null)(StoreLayout);

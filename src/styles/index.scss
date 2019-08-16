@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import './app';
 
 body {
   margin: 0;
@@ -9,26 +10,3 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.layout {
-  height: 100vh;
-}
-.logo {
-  height: 110px;
-  background: #131C2E;
-}
-
-.login-container {
-	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.login-container .login-form {
-  max-width: 300px;
-}
-.login-container .login-form-forgot {
-  float: right;
-}
-.login-container .login-form-button {
-  width: 100%;
-}
