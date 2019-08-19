@@ -15,7 +15,7 @@ service.interceptors.request.use(config => config, error => {
 
 // respone拦截器
 service.interceptors.response.use(
-  response => response
+  response => response.data
   // {
   //   /**
   //    * 下面的注释为通过response自定义code来标示请求状态，当code返回如下情况为权限有问题，登出并返回到登录页

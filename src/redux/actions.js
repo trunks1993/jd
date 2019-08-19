@@ -32,7 +32,7 @@ export function getUser(token) {
     dispatch(requestUser());
     // 异步请求后端接口
     return getUserByToken(token).then(
-      res => dispatch(receiveUser(res.data.data.user)),
+      res => dispatch(receiveUser(res.data.user)),
       error => dispatch(recevieUserOnError('error'))
     );
   };
@@ -45,8 +45,8 @@ export function loginByUsername(username, password) {
     // 异步请求后端接口
     return login(username, password).then(
       res => {
-        setToken(res.data.data.token);
-        return dispatch(receiveUser(res.data.data.user));
+        setToken(res.data.token);
+        return dispatch(receiveUser(res.data.user));
       },
       error => dispatch(recevieUserOnError('error'))
     );
