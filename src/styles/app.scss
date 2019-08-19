@@ -1,24 +1,28 @@
 $fullHeight: 100vh;
 $headerHight: 110px;
-$antdMenuSelectedColor: #0ACBEE;
+$antdMenuSelectedColor: #0acbee;
 $customizeBlack: #131c2e;
-
-// 常用继承样式
+$customizeWhite: #fff;
+// common style
 .common-flex {
   display: flex;
-	align-items: center;
+  align-items: center;
   justify-content: center;
 }
+.common-imgurl-1 {
+  background: url(../assets/images/loginBg.png);
+}
 
-// layout主体
+// layout
 .layout {
   height: $fullHeight;
 }
 
-// 登录页样式
+// login page style
 .login-container {
-	height: $fullHeight;
-	@extend .common-flex;
+  height: $fullHeight;
+  @extend .common-imgurl-1;
+  @extend .common-flex;
   .login-form {
     max-width: 300px;
   }
@@ -30,9 +34,64 @@ $customizeBlack: #131c2e;
   }
 }
 
-// 侧边栏
+// service select page
+.service-container {
+  @extend .common-imgurl-1;
+  height: $fullHeight;
+  overflow: hidden;
+  &-head {
+    padding: 0;
+    height: $headerHight;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    img {
+      width: 11%;
+      position: absolute;
+      left: 40px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    .user-dropdown {
+      @extend .user-dropdown;
+      color: $customizeWhite;
+      font-size: 12px;
+    }
+  }
+  &-welcome {
+    width: 265px;
+    font-size: 24px;
+    margin: 14vh auto 0;
+    color: $customizeWhite;
+  }
+  &-menu {
+    padding: 0;
+    width: 58%;
+    margin: 7.7vh auto 0;
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      display: block;
+      width: 15%;
+      text-align: center;
+      color: $customizeWhite;
+      margin-bottom: 11vh;
+      font-size:14px;
+      &:not(:nth-child(5n+1)) {
+        margin-left: 6.25%;
+      }
+      img {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+// sider page style
 .sider-container {
-  box-shadow: 1px 1px 5px 5px rgba(0,0,0,0.1);
+  box-shadow: 1px 1px 5px 5px rgba(0, 0, 0, 0.1);
   &-logo {
     height: $headerHight;
     background: $customizeBlack;
@@ -43,11 +102,12 @@ $customizeBlack: #131c2e;
   }
   .sider-menu {
     height: calc(100% - #{$headerHight});
-    border-right: 0; 
+    border-right: 0;
     background: $customizeBlack;
     padding-top: 40px;
-    .ant-menu-sub, .ant-menu-submenu {
-      color: #DEDEDE;
+    .ant-menu-sub,
+    .ant-menu-submenu {
+      color: #dedede;
     }
     .ant-menu-submenu-open {
       color: $antdMenuSelectedColor;
@@ -57,30 +117,35 @@ $customizeBlack: #131c2e;
     }
     .ant-menu-item-selected {
       color: $antdMenuSelectedColor;
-      background: #000c17!important;
+      background: #000c17 !important;
     }
   }
 }
 
-// 头部
+// head of layout page style
 .header-container {
-  background: #fff;
+  background: $customizeWhite;
   padding: 0;
   height: $headerHight;
   position: relative;
-  .ant-dropdown-link {
-    position: absolute;
-    right: 40px;
-    top: 50%;
-    transform: translate(0, -50%);
+  .user-dropdown {
+    @extend .user-dropdown;
     font-size: 24px;
-    color:rgba(72, 88, 119, 1);
-    font-family:ArialMT;
+    color: rgba(72, 88, 119, 1);
   }
 }
 
-// 主体部分
+// main of layout component style
 .main-container {
   padding: 40px;
   background: rgb(230, 231, 233);
+}
+
+// components style
+.user-dropdown {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-family: ArialMT;
 }

@@ -5,6 +5,8 @@ import Header from './Header';
 import { Layout } from 'antd';
 import { RouteList } from '@/router';
 import { UserContext } from '@/utils/contexts';
+import { logo } from '@/assets/images';
+
 const { Sider } = Layout;
 
 const StoreLayout = ({ match, user }) => {
@@ -13,7 +15,7 @@ const StoreLayout = ({ match, user }) => {
       <Layout className="layout">
         <Sider className="sider-container" width={270}>
           <div className="sider-container-logo">
-            <img alt="" src={require('@/assets/images/siderLogo.png')} />
+            <img alt="" src={logo} />
           </div>
           <SiderMenu match={match} />
         </Sider>
