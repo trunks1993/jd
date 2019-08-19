@@ -57,4 +57,3 @@ export const loginOut = () => dispatch => {
   removeToken();
   return dispatch(receiveUser({}));
 };
-
