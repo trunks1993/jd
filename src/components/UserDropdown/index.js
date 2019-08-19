@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext } from 'react';
+import React from 'react';
 import { Dropdown, Icon, Menu } from 'antd';
-import { UserContext } from '@/utils/contexts';
 import { connect } from 'react-redux';
 import { loginOut } from '@/redux/actions';
 
-const UserDropdown = ({ handleLoginOut }) => {
-  const user = useContext(UserContext);
+const UserDropdown = ({ user, handleLoginOut }) => {
   return (
     <Dropdown className="user-dropdown" overlay={
       <Menu onClick={({ item, key, keyPath, domEvent }) => {
@@ -29,10 +27,16 @@ const UserDropdown = ({ handleLoginOut }) => {
   );
 };
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     handleLoginOut: () => dispatch(loginOut())
   };
 };
 
-export default connect(null, mapDispatchToProps)(UserDropdown);
+export default connect(mapStateToProps, mapDispatchToProps)(UserDropdown);
