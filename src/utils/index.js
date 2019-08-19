@@ -1,7 +1,6 @@
 import loadable from '@/utils/loadable';
 
-const home = loadable(() => import('@/pages/home'));
-const detail = loadable(() => import('@/pages/detail'));
+const tablePageTest = loadable(() => import('@/pages/tablePageTest'));
 
 export function flatTree(tree, flatArr = []) {
   func(tree, flatArr);
@@ -14,4 +13,4 @@ function func(tree, arr) {
   tree.map(item => (item.children && item.children.length) && func(item.children, arr));
 }
 
-export default { home, detail };
+export default { tablePageTest };

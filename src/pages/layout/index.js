@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SiderMenu from './SiderMenu';
-import Header from './Header';
+import { Header, SiderMenu } from './components';
 import { Layout } from 'antd';
 import { RouteList } from '@/router';
 import { UserContext } from '@/utils/contexts';
