@@ -1,5 +1,5 @@
 import { getUserByToken, login } from '@/api/index';
-import { setToken } from '@/utils/auth';
+import { setToken, removeToken } from '@/utils/auth';
 
 // 通知 reducer 请求开始的 user
 export const REQUEST_USER = 'REQUEST_USER';
@@ -32,7 +32,7 @@ export function getUser(token) {
     dispatch(requestUser());
     // 异步请求后端接口
     return getUserByToken(token).then(
-      res => dispatch(receiveUser(res.data.data.user)),
+      res => dispatch(receiveUser(res.data.user)),
       error => dispatch(recevieUserOnError('error'))
     );
   };
@@ -45,10 +45,15 @@ export function loginByUsername(username, password) {
     // 异步请求后端接口
     return login(username, password).then(
       res => {
-        setToken(res.data.data.token);
-        return dispatch(receiveUser(res.data.data.user));
+        setToken(res.data.token);
+        return dispatch(receiveUser(res.data.user));
       },
       error => dispatch(recevieUserOnError('error'))
     );
   };
 }
+
+export const loginOut = () => dispatch => {
+  removeToken();
+  return dispatch(receiveUser({}));
+};
